@@ -1,6 +1,6 @@
 {
   "name": "bem-components-php",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "bh.php templates for bem-components library",
   "bugs": "https://github.com/bem/bem-components-php/issues",
   "main": "",
@@ -11,8 +11,8 @@
     "*.bundles"
   ],
   "dependencies": {
-    "bem-components": "2.0.0",
-    "bem-core-php": "2.5.1"
+    "bem-components": "2.1.0",
+    "bem-core-php": "2.6.0"
   },
   "license": "MPL-2.0"
 }
