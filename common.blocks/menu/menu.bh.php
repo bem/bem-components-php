@@ -38,7 +38,9 @@ return function ($bh) {
                     }
                     // menu__group
                     if ($itemOrGroup->block !== 'menu-item') {
-                        $iterateItems($content[$_]);
+                        if ($itemOrGroup->content) {
+                            $iterateItems($itemOrGroup->content);
+                        }
                         continue;
                     }
 
