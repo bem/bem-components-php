@@ -16,7 +16,7 @@ return function ($bh) {
 
         if ($res->block === 'button') {
             $resMods = $res->mods;
-            $dropdownMods = $json->blockMods;
+            $dropdownMods = $json->blockMods ?: $json->mods;
             $resMods->size || ($resMods->size = $dropdownMods->size);
             $resMods->theme || ($resMods->theme = $dropdownMods->theme);
             $resMods->disabled = $dropdownMods->disabled;

@@ -2,7 +2,7 @@
 return function ($bh) {
 
     $bh->match('select__button', function($ctx, $json) {
-        $mods = $json->blockMods;
+        $mods = $json->blockMods ?: $json->mods;
         $select = $ctx->tParam('select');
         $checkedOptions = $ctx->tParam('checkedOptions');
 
