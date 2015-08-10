@@ -39,7 +39,6 @@ return function ($bh) {
                 return isset($optionOrGroup['group'])?
                     [
                         'elem' => 'group',
-                        'mods' => [ 'has-title' => !!@$optionOrGroup['title'] ],
                         'title' => @$optionOrGroup['title'],
                         'content' => array_map($optionToMenuItem, $optionOrGroup['group'])
                     ] :

@@ -2,13 +2,15 @@
 return function ($bh) {
 
     $bh->match('button', function($ctx, $json) {
+        $ctx->tag($json->tag ?: 'button'); // NOTE: need to predefine tag
+
         $json->icon = $ctx->phpize($json->icon);
         $modType = $ctx->mod('type');
-        $isRealButton = !$modType || $modType === 'submit';
+        $isRealButton = ($ctx->tag() === 'button')
+            && (!$modType || $modType === 'submit');
 
         $ctx
             ->tParam('_button', $json)
-            ->tag($json->tag ?: 'button')
             ->js(true)
             ->attrs([
                 'role' => 'button',
@@ -21,8 +23,11 @@ return function ($bh) {
             ])
             ->mix([ 'elem' => 'control' ]); // NOTE: satisfy interface of `control`
 
-        $isRealButton &&
-            $ctx->mod('disabled') && $ctx->attr('disabled', 'disabled');
+        if ($ctx->mod('disabled')) {
+            $isRealButton ?
+                $ctx->attr('disabled', 'disabled')
+                : $ctx->attr('aria-disabled', 'true');
+        }
 
         $content = $ctx->content();
         if ($content === null) {
