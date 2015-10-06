@@ -26,7 +26,7 @@ return function ($bh) {
                 } else {
                     $refs->firstOption || ($refs->firstOption =& $content[$_]);
                     //var_dump(compact('refs') + ['contains?' => $containsVal(@$option['val'])]);
-                    if(isset($containsVal($option['val']))) {
+                    if(isset($option['val']) and $containsVal($option['val'])) {
                         $content[$_]['checked'] = true;
                         $refs->checkedOptions[] =& $content[$_];
                     }
