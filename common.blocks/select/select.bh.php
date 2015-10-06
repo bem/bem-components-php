@@ -22,7 +22,7 @@ return function ($bh) {
         $iterateOptions = function (&$content) use ($containsVal, &$iterateOptions, $refs) {
             foreach ($content as $_ => $option) {
                 if(@$option['group']) {
-                    $iterateOptions(@$content[$_]['group']);
+                    @$iterateOptions(@$content[$_]['group']);
                 } else {
                     $refs->firstOption || ($refs->firstOption =& $content[$_]);
                     //var_dump(compact('refs') + ['contains?' => $containsVal(@$option['val'])]);
