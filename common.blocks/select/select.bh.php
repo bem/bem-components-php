@@ -21,12 +21,12 @@ return function ($bh) {
 
         $iterateOptions = function (&$content) use ($containsVal, &$iterateOptions, $refs) {
             foreach ($content as $_ => $option) {
-                if(@$option['group']) {
-                    @$iterateOptions(@$content[$_]['group']);
+                if(isset($option['group'])) {
+                    $iterateOptions($content[$_]['group']);
                 } else {
                     $refs->firstOption || ($refs->firstOption =& $content[$_]);
                     //var_dump(compact('refs') + ['contains?' => $containsVal(@$option['val'])]);
-                    if($containsVal(@$option['val'])) {
+                    if(isset($containsVal($option['val']))) {
                         $content[$_]['checked'] = true;
                         $refs->checkedOptions[] =& $content[$_];
                     }
