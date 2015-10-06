@@ -30,7 +30,7 @@
   },
   "scripts": {
     "start": "magic server",
-    "deps": "bower-npm-install --non-interactive && npm run deps-bh-php",
+    "deps": "bower install && npm run deps-bh-php",
     "deps-bh-php": "[ -d ./vendor/bem/bh ] || git clone --branch 4.1.0 https://github.com/bem/bh-php.git ./vendor/bem/bh",
     "bem-test": "npm run deps && magic run tmpl-specs",
     "test": "npm run bem-test"
