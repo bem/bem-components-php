@@ -13,6 +13,11 @@ return function ($bh) {
                 'theme' => $mods->theme,
                 'size' => $mods->size
             ],
+            'attrs' => [
+                'role' => 'checkbox',
+                'aria-pressed' => null,
+                'aria-checked' => $mods->checked? 'true' : 'false'
+            ],
             'title' => $json->title,
             'content' => [
                 $json->icon,

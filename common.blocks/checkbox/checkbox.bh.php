@@ -15,7 +15,10 @@ return function ($bh) {
                         'val' => $json->val
                     ]
                 ],
-                $json->text
+                $json->text ? [
+                    'elem' => 'text',
+                    'content' => $json->text
+                ] : ''
             ]);
     });
 

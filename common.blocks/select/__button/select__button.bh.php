@@ -4,7 +4,11 @@ return function ($bh) {
     $bh->match('select__button', function($ctx, $json) {
         $mods = $json->blockMods ?: $json->mods;
         $select = $ctx->tParam('select');
-        $checkedOptions = $ctx->tParam('checkedOptions');
+        $refs = $ctx->tParam('refs');
+        $checkedOptions = $refs->checkedOptions;
+        $selectTextId = $ctx->generateId();
+
+        $ctx->tParam('selectTextId', $selectTextId);
 
         return [
             'block' => 'button',
@@ -17,6 +21,12 @@ return function ($bh) {
                 'disabled' => $mods->disabled,
                 'checked' => $mods->mode !== 'radio' && count($checkedOptions)
             ],
+            'attrs' => [
+                'role' => 'listbox',
+                'aria-owns' => join(' ', $refs->optionIds),
+                'aria-multiselectable' => $mods->mode === 'check'? 'true' : null,
+                'aria-labelledby' => $selectTextId
+            ],
             'id' => $select->id,
             'tabIndex' => $select->tabIndex,
             'content' => [
@@ -24,6 +34,12 @@ return function ($bh) {
                 [ 'block' => 'icon', 'mix' => [ 'block' => 'select', 'elem' => 'tick' ] ]
             ]
         ];
+    });
+
+    $bh->match('button__text', function($ctx) {
+        if($ctx->tParam('select')) {
+            $ctx->attr('id', $ctx->tParam('selectTextId'));
+        }
     });
 
 };

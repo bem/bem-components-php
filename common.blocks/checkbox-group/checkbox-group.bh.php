@@ -4,6 +4,7 @@ return function ($bh) {
     $bh->match('checkbox-group', function($ctx, $json) {
         $ctx
             ->tag('span')
+            ->attrs([ 'role' => 'group' ])
             ->js(true)
             ->mix([ 'block' => 'control-group' ]);
 

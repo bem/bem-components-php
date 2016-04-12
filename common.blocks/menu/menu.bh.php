@@ -2,18 +2,18 @@
 return function ($bh) {
 
     $bh->match('menu', function($ctx, $json) {
-        $menuMods = [
-            'theme' => $ctx->mod('theme'),
-            'disabled' => $ctx->mod('disabled')
-        ];
+        $mods = $ctx->mods();
+        $attrs = [ 'role' => 'menu' ];
 
         $ctx
             ->js(true)
-            ->tParam('menuMods', $menuMods)
+            ->tParam('menuMods', $mods)
             ->mix([ 'elem' => 'control' ]);
 
-        $attrs = [ 'role' => 'menu' ];
-        $ctx->mod('disabled') || ($attrs['tabindex'] = 0);
+        $mods->disabled?
+            $attrs['aria-disabled'] = 'true' :
+            $attrs['tabindex'] = 0;
+
         $ctx->attrs($attrs);
 
         $refs = new stdClass();

@@ -8,6 +8,8 @@ return function ($bh) {
             $res = [
                 'block' => 'menu-item',
                 'mods' => [ 'disabled' => $mods->disabled ?: @$option['disabled'] ],
+                'attrs' => [ 'role' => 'option' ],
+                'id' => @$option['id'],
                 'val' => @$option['val'],
                 'js' => [ 'checkedText' => @$option['checkedText'] ],
                 'content' => @$option['text']
@@ -34,7 +36,7 @@ return function ($bh) {
                 'mode' => $mods->mode
             ],
             'val' => $select->val,
-            'attrs' => [ 'tabindex' => null ],
+            'attrs' => [ 'role' => null, 'tabindex' => null ],
             'content' => array_map(function ($optionOrGroup) use ($select, $optionToMenuItem) {
                 return isset($optionOrGroup['group'])?
                     [

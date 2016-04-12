@@ -4,6 +4,7 @@ return function ($bh) {
     $bh->match('radio-group', function($ctx, $json) {
         $ctx
             ->tag('span')
+            ->attrs([ 'role' => 'radiogroup' ])
             ->js(true)
             ->mix([ 'block' => 'control-group' ]);
 

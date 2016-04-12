@@ -6,10 +6,18 @@ return function ($bh) {
 
         if(key_exists('title', $json)) {
             $title = $json->title;
+            $titleId = $ctx->generateId();
             $ctx
-                ->attr('aria-label', $title, true)
+                ->attr('aria-labelledby', $titleId)
                 ->content([
-                    [ 'elem' => 'group-title', 'content' => $title ],
+                    [
+                        'elem' => 'group-title',
+                        'attrs' => [
+                            'role' => 'presentation',
+                            'id' => $titleId
+                        ],
+                        'content' => $title
+                    ],
                     $ctx->content()
                 ], true);
         }

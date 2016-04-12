@@ -9,7 +9,7 @@ return function ($bh) {
         $url = !$ctx->isSimple($json->url)? // url could contain bemjson
             $bh->apply($json->url) :
             $json->url;
-        $attrs = [];
+        $attrs = [ 'role' => 'link' ];
 
         $tabIndex = null;
         if (!$ctx->mod('disabled')) {
@@ -22,6 +22,7 @@ return function ($bh) {
             $ctx->js(true);
         } else {
             $ctx->js($url? [ 'url' => $url ] : true);
+            $attrs['aria-disabled'] = 'true';
         }
 
 

@@ -11,6 +11,7 @@ return function ($bh) {
         $refs = new StdClass();
         $refs->firstOption = null;
         $refs->checkedOptions = [];
+        $refs->optionIds = [];
 
         $containsVal = function ($val) use ($isValDef, $isModeCheck, $json) {
             return $isValDef &&
@@ -19,13 +20,13 @@ return function ($bh) {
                     $json->val === $val);
         };
 
-        $iterateOptions = function (&$content) use ($containsVal, &$iterateOptions, $refs) {
+        $iterateOptions = function (&$content) use ($containsVal, &$iterateOptions, $refs, $ctx) {
             foreach ($content as $_ => $option) {
                 if(isset($option['group'])) {
                     $iterateOptions($content[$_]['group']);
                 } else {
                     $refs->firstOption || ($refs->firstOption =& $content[$_]);
-                    //var_dump(compact('refs') + ['contains?' => $containsVal(@$option['val'])]);
+                    $refs->optionIds[] = $content[$_]['id'] = $ctx->generateId();
                     if(isset($option['val']) and $containsVal($option['val'])) {
                         $content[$_]['checked'] = true;
                         $refs->checkedOptions[] =& $content[$_];
