@@ -16,7 +16,7 @@ return function ($bh) {
             ->js([ 'val' => $json->val ])
             ->attrs([
                 'role' => $role,
-                'id' => $ctx->generateId(),
+                'id' => $json->id ?: $ctx->generateId(),
                 'aria-disabled' => $ctx->mod('disabled') ? 'true' : null,
                 'aria-checked' => $menuMode ? ($ctx->mod('checked')? 'true' : 'false') : null
             ]);

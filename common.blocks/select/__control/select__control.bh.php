@@ -9,7 +9,8 @@ return function ($bh) {
                 'type' => 'hidden',
                 'name' => $ctx->tParam('select')->name,
                 'value' => $json->val,
-                'disabled' => $mods->disabled? 'disabled' : null
+                'disabled' => $mods->disabled? 'disabled' : null,
+                'autocomplete' => 'off'
             ]);
     });
 
